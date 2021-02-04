@@ -22,6 +22,17 @@ public class MainActivity extends AppCompatActivity {
         displayPrice(numberOfCoffees * 14);
     }
 
+    public void increase (View view) {
+        int quantity = 3;
+        display(quantity);
+    }
+
+    public void decrease (View view) {
+        int quantity = 1;
+        display(quantity);
+    }
+
+
     private void display(int number) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
         quantityTextView.setText("" + number);
