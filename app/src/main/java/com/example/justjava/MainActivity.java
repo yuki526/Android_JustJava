@@ -6,8 +6,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.text.NumberFormat;
-
 public class MainActivity extends AppCompatActivity {
 
     int quantity = 0;
@@ -19,7 +17,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void submitOrder(View view) {
-        displayPrice(quantity * 5);
+        int price = calculatePrice();
+        String message = createOrderSummary(price);
+        displayMessage(message);
+    }
+
+    private String createOrderSummary (int price) {
+        String summary = "Name: Kaptain Kunal \nQuantity: " + this.quantity +
+                         "\nTotal: $" + price + "\nThank you!";
+        return summary;
+    }
+
+    private int calculatePrice() {
+        int price = quantity * 5;
+        return price;
     }
 
     public void increase (View view) {
@@ -34,19 +45,13 @@ public class MainActivity extends AppCompatActivity {
         display(quantity);
     }
 
-
     private void display(int number) {
-        TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
+        TextView quantityTextView = findViewById(R.id.quantity_text_view);
         quantityTextView.setText("" + number);
     }
 
-    private void displayPrice(int number) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
-    }
-
     private void displayMessage(String message) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(message);
+        TextView orderSummaryTextView = findViewById(R.id.order_summary_text_view);
+        orderSummaryTextView.setText(message);
     }
 }
