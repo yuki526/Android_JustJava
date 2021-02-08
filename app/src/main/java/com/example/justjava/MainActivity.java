@@ -1,5 +1,6 @@
 package com.example.justjava;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         String name = getName();
         String message = createOrderSummary(price, addWhippedCream, addChocolate, name);
         displayMessage(message);
+        composeEmail(name, message);
     }
 
     private String createOrderSummary (int price, boolean addWhippedCream, boolean addChocolate, String name) {
@@ -107,5 +109,15 @@ public class MainActivity extends AppCompatActivity {
     private void displayMessage(String message) {
         TextView orderSummaryTextView = findViewById(R.id.order_summary_text_view);
         orderSummaryTextView.setText(message);
+    }
+
+    private void composeEmail(String name, String text) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setType("*/*");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "JustJava Order for " + name );
+        intent.putExtra(Intent.EXTRA_TEXT, text);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 }
