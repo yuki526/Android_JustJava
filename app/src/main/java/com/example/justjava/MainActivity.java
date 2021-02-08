@@ -19,9 +19,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void submitOrder(View view) {
-        int price = calculatePrice();
         boolean addWhippedCream = addWhippedCream();
         boolean addChocolate = addChocolate();
+        int price = calculatePrice(addWhippedCream, addChocolate);
         String name = getName();
         String message = createOrderSummary(price, addWhippedCream, addChocolate, name);
         displayMessage(message);
@@ -36,9 +36,29 @@ public class MainActivity extends AppCompatActivity {
         return summary;
     }
 
-    private int calculatePrice() {
-        int price = quantity * 5;
-        return price;
+    private int calculatePrice(boolean addWhippedCream, boolean addChocolate) {
+        int priceOfCoffee =  5;
+        int addFee = 0;
+        if (addWhippedCream) {
+            addFee += 1;
+        }
+        if (addChocolate) {
+            addFee += 2;
+        }
+
+        return ( priceOfCoffee + addFee ) * quantity;
+    }
+
+    private int addToppingFee(boolean addWhippedCream, boolean addChocolate) {
+        int addFee = 0;
+        if (addWhippedCream) {
+            addFee += 1;
+        }
+        if (addChocolate) {
+            addFee += 2;
+        }
+
+        return addFee * quantity;
     }
 
     public void increase (View view) {

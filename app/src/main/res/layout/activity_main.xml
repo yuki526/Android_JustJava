@@ -18,7 +18,7 @@
             android:layout_margin="16dp"
             android:autofillHints=""
             android:hint="@string/name"
-            android:inputType="text" />
+            android:inputType="textCapWords" />
 
         <TextView
             android:id="@+id/toppings"
@@ -124,4 +124,6 @@
             app:backgroundTint="#E3D7D7" />
 
     </LinearLayout>
+
+
 </ScrollView>
