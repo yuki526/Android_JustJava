@@ -5,12 +5,14 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    int quantity = 0;
+    int priceOfCoffee =  5;
+    int quantity = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +38,7 @@ public class MainActivity extends AppCompatActivity {
         return summary;
     }
 
-    private int calculatePrice(boolean addWhippedCream, boolean addChocolate) {
-        int priceOfCoffee =  5;
+    private int calculatePrice(boolean addWhippedCream, boolean addChocolate)  {
         int addFee = 0;
         if (addWhippedCream) {
             addFee += 1;
@@ -62,14 +63,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void increase (View view) {
+        if (quantity == 100) {
+            // Show an error message as a toast
+            Toast.makeText(this, "You cannot have more than 100 coffees", Toast.LENGTH_SHORT).show();
+            // Exit this method early because there's nothing left to do
+            return;
+        }
         quantity += 1;
         display(quantity);
     }
 
     public void decrease (View view) {
-        if (quantity != 0 ) {
-         quantity -= 1;
+        if (quantity == 1 ) {
+            return;
         }
+        quantity -= 1;
         display(quantity);
     }
 
