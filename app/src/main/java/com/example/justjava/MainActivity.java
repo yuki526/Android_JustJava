@@ -3,6 +3,7 @@ package com.example.justjava;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,12 +22,13 @@ public class MainActivity extends AppCompatActivity {
         int price = calculatePrice();
         boolean addWhippedCream = addWhippedCream();
         boolean addChocolate = addChocolate();
-        String message = createOrderSummary(price, addWhippedCream, addChocolate);
+        String name = getName();
+        String message = createOrderSummary(price, addWhippedCream, addChocolate, name);
         displayMessage(message);
     }
 
-    private String createOrderSummary (int price, boolean addWhippedCream, boolean addChocolate) {
-        String summary = "Name: Kaptain Kunal" +
+    private String createOrderSummary (int price, boolean addWhippedCream, boolean addChocolate, String name) {
+        String summary = "Name: " + name +
                          "\nAdd whipped cream? " + addWhippedCream +
                          "\nAdd chocolate? " + addChocolate +
                          "\nQuantity: " + this.quantity +
@@ -61,6 +63,12 @@ public class MainActivity extends AppCompatActivity {
         CheckBox chocolateBox = findViewById(R.id.chocolate_checkBox);
         boolean isChecked = chocolateBox.isChecked();
         return isChecked;
+    }
+
+    private String getName() {
+        EditText inputText =findViewById(R.id.name_form);
+        String name = inputText.getText().toString();
+        return name;
     }
 
     private void display(int number) {
