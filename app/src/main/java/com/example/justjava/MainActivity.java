@@ -1,6 +1,7 @@
 package com.example.justjava;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -113,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void composeEmail(String name, String text) {
         Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setType("*/*");
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
         intent.putExtra(Intent.EXTRA_SUBJECT, "JustJava Order for " + name );
         intent.putExtra(Intent.EXTRA_TEXT, text);
         if (intent.resolveActivity(getPackageManager()) != null) {
